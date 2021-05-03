@@ -7,6 +7,7 @@ fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=g')
 .then(response => response.json())
 .then(data => {
         cocktailList(data.drinks);
+        extravagantCocktails(data.drinks);
 })
 
 
@@ -22,5 +23,20 @@ const cocktailList = (drinks) => {
         })
 
 console.log(" total number of drinks starting with G", drinks.length);
-console.log(" these are my G drinks", drinksNames.join(", "));
+console.log(" these are my G drinks", drinksNames.join("\n- "));
 }
+
+// punto 4
+// logging the extravagant cocktails with more than 4 ingredients
+const extravagantCocktails = (drinks) => {
+      const drinksNames = [];
+
+      drinks.map((drink) => {
+              if(drink.strIngredient5) {
+                      drinksNames.push(drink.strDrink)
+              }
+      })
+
+ console.log( " these are my extravagant cocktails", drinksNames.join("\n- "))     
+}
+
