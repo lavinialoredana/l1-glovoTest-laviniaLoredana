@@ -12,7 +12,8 @@ fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=g')
         extravagantCocktails(data.drinks);
         extravagantIngredients(extravagantDrinks);
         extravagantIngredientsQuantities(extravagantDrinks);
-})
+        drinkType(extravagantDrinks);
+});
 
 
 //  punto 3
@@ -118,3 +119,30 @@ const extravagantIngredientsQuantities = (drinks) => {
 console.log("these are my ED with ingredients quantities", extravagantDrinksDetails)
 }
 
+
+// punto 7
+// splitting drinks into alcoholic and non-alcoholic
+
+const drinkType = (drinks) => {
+
+        const alcoholDrinks = [];
+        const nonAlcoholDrinks =[];
+
+        drinks.map( (drink) => {
+                
+                if(drink.strAlcoholic === "Alcoholic") {
+                        alcoholDrinks.push(drink);
+                }
+                else {
+                        nonAlcoholDrinks.push(drink);
+                }
+        })
+
+     console.log("Alcoholic drinks");  
+     extravagantIngredientsQuantities(alcoholDrinks);
+
+     console.log("Non- Alcoholic drinks"); 
+     extravagantIngredientsQuantities(nonAlcoholDrinks);
+
+
+}
