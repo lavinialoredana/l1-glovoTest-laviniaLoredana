@@ -1,0 +1,13 @@
+{
+  "name": "l1-code-assignment",
+  "version": "1.0.0",
+  "description": "Glovo code assignment",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node ."
+  },
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  }
+}
