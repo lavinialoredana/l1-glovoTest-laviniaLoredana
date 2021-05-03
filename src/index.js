@@ -11,6 +11,7 @@ fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=g')
         cocktailList(data.drinks);
         extravagantCocktails(data.drinks);
         extravagantIngredients(extravagantDrinks);
+        extravagantIngredientsQuantities(extravagantDrinks);
 })
 
 
@@ -45,6 +46,7 @@ const extravagantCocktails = (drinks) => {
 }
 
 // punto 5
+// parse the list of the extravagant cocktails and its ingredients and log the results
 
 const extravagantIngredients = (drinks) => {
         const extravagantDrinksDetails = [];
@@ -75,3 +77,44 @@ const extravagantIngredients = (drinks) => {
 console.log( "These are my ED with extravagants ingredients", extravagantDrinksDetails);
 
 }
+
+
+// punto 6
+// I am repeting the code snippet from punto 5 and adding the quantity per ingredient
+
+const extravagantIngredientsQuantities = (drinks) => {
+        const extravagantDrinksDetails = [];
+
+        drinks.map( (drink) => {
+                const ingredients=[];
+
+                // I've decided to use no. 15 in the JSON obj because I noticed that 
+                // all drinks have a maximum of 15 ingredients                         for( let i = 1; i <= 15; i++ ){
+                for( let i = 1; i <= 15; i++){
+
+                // Since it's difficult to access it I am obteining the value of this property in a dynamic way
+                        if(drink[`strIngredient${i}`]) { 
+                                        ingredients.push({
+                                                name:drink[`strIngredient${i}`],
+                // Adding the quantity and replacing the null value whenever the quantity is missing to " to taste".
+                                                quantity:drink[`strMeasure${i}`] || "to taste",
+                                        });
+                                        
+        
+                        }
+                                else {
+                                        break;
+                             }
+                        }
+
+                       
+                       extravagantDrinksDetails.push({ 
+                               name:drink.strDrink,
+                               id:drink.idDrink,
+                               ingredients: JSON.stringify(ingredients),
+                               })
+
+        })
+console.log("these are my ED with ingredients quantities", extravagantDrinksDetails)
+}
+
